@@ -50,11 +50,41 @@
 }
 
 - (void) updateInterfaceWithArray:(NSArray *)properties {
+    [self animateLayer:self.tempView.layer];
     self.tempField.text = [NSString stringWithFormat:@"%@ F", properties[0]];
+    
+    [self animateLayer:self.humidityView.layer];
     self.humidityField.text = [NSString stringWithFormat:@"%@ %%", properties[1]];
+    
+    [self animateLayer:self.windSpeedView.layer];
     self.windSpeedField.text = [NSString stringWithFormat:@"%@", properties[2]];
+   
+    [self animateLayer:self.windDirectionView.layer];
     self.windDirection.text = [NSString stringWithFormat:@"%@", properties[3]];
 }
+
+- (void)animateLayer:(CALayer*)viewLayer {
+    NSValue *value = nil;
+    CABasicAnimation *animation = nil;
+    CATransform3D transform;
+    
+    [viewLayer removeAllAnimations];
+    
+    animation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    transform = CATransform3DMakeRotation(0.26179166666667f, 0.0f, 0.0f, 1.0f);
+    value = [NSValue valueWithCATransform3D:transform];
+    [animation setToValue:value];
+    
+    transform = CATransform3DMakeRotation(0.0f, 0.0f, 0.0f, 1.0f);
+    value = [NSValue valueWithCATransform3D:transform];
+    [animation setFromValue:value];
+    
+    [animation setAutoreverses:YES];
+    [animation setDuration:0.05f];
+    [animation setRepeatCount:1.0f];
+    [viewLayer addAnimation:animation forKey:@"transform"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

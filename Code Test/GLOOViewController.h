@@ -18,5 +18,9 @@
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *timeField;
 - (IBAction)sliderChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *tempView;
+@property (weak, nonatomic) IBOutlet UIView *humidityView;
+@property (weak, nonatomic) IBOutlet UIView *windSpeedView;
+@property (weak, nonatomic) IBOutlet UIView *windDirectionView;
 - (IBAction)sliderComplete:(id)sender;
 @end
